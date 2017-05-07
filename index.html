@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>tohachiken</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        h1 {
+            letter-spacing: 10px;
+            background: #ffe3b9;
+            text-indent: 20px;
+        }
+        input{
+            padding: 5px 20px;
+            background : #988e18;
+            color: white;
+            font-size: 24px;
+            margin: 20px 6px;
+        }
+        
+        .images {
+            height: 1067px;
+            width:  800px;
+            background-color: #5c5445;
+        }
+        
+        img {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>東八拳 練習部屋</h1>
+    
+    <p>これは東八拳（とうはちけん）練習用の画像です。自由に使ってください。</p>
+    <p>切り替え速度は下のボタンで調整が出来ます。</p>
+    <p>モデルは草場さんです。東八拳の映像は<a href="https://www.youtube.com/channel/UCJoWjCID01dmVJKAGwN6i2Q" target="_blank">こちら</a></p>
+    
+    <div class="images">
+        <img src="img/0.jpg">
+        <img src="img/1.jpg">
+        <img src="img/2.jpg">
+    </div>
+    
+    <input type="button" value="最初から始める" onclick="location.reload();" />
+    <input type="button" value="ゆっくり" onclick="ChangeInterval(100);" />
+    <input type="button" value="はやく" onclick="ChangeInterval(-100);" />
+    <span id="time_desplay"></span>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script>
+        var interval = 0;
+        ChangeInterval(1500);
+        $($('img').get(0)).show();
+        
+        function ChangeInterval (value) {
+            if(interval > 500 || value > 0) interval += value;
+            $("#time_desplay").text("切り替え秒数：" + interval + " ミリ秒 " + (interval == 500 ? "（最速）" : ""));
+        }
+        
+        function UpdateImage (id) {
+            $('img').hide();
+            $($('img').get(id)).show();
+        }
+        
+        setTimeout("loop()", 2000);
+        function loop(){
+            $("img").hide();
+            setTimeout(blink,60);
+        }
+        
+        function blink(){
+            UpdateImage(Math.floor(Math.random() * 3));
+            setTimeout(loop,interval);
+        }
+    </script>
+</body>
+</html>
